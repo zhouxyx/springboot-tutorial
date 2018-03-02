@@ -1,2 +1,11 @@
 server:
   port: 8888
+  
+debug: true
+
+logging:
+  file: demo.log
+  path: F:\\advanced\\log
+  level:
+    root: INFO
+    org.springframework.web: DEBUG

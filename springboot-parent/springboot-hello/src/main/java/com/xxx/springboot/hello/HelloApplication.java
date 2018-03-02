@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloApplication {
 
 	@GetMapping(value = "hello")
-	public Map<String,String> hello() {
-		Map<String,String> map = new HashMap<String,String>(10);
+	public Map<String, String> hello() {
+		Map<String, String> map = new HashMap<String, String>(10);
 		map.put("message", "Hello Spring Boot!");
 		return map;
 	}

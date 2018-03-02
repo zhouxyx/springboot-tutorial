@@ -1,0 +1,12 @@
+server:
+  port: 8888
+
+
+# 如果只配置logging.path ，则会生成spring.log的文件
+# 如果只配置logging.file,则会在当前项目生成log文件（也可以使用绝对路径）
+# logging.path和logging.file同时配置，不会在这个路径有F:\\advanced\\log\\demo2.log日志生成，logging.path和logging.file不会进行叠加
+logging:
+  file: F:\\advanced\\log\\demo2.log
+#  path: F:\\advanced\\log
+  level:
+    root: INFO
