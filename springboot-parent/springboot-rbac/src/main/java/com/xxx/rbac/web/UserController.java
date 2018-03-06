@@ -1,5 +1,7 @@
 package com.xxx.rbac.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +21,23 @@ import com.xxx.rbac.vo.UserVo;
 @RestController
 @RequestMapping(value = "sys")
 public class UserController {
-
+	
 	@Autowired
 	private UserService userService;
 
+	
+	@GetMapping(value = "session/set")
+	public String session(HttpSession session) {
+		session.setAttribute("KEY", "VALUE");
+		return "SET SESSION";
+	}
+
+	@GetMapping(value = "session/get")
+	public String getSession(HttpSession session) {
+		return "A:"+session.getAttribute("KEY").toString();
+	}
+	
+	
 	@PostMapping(value = "user")
 	public ResultVo save(@RequestBody User user) {
 		ResultVo rv = new ResultVo();
