@@ -1,38 +1,27 @@
 package com.xxx.springboot.mybatis;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-/**
- * Unit test for simple App.
- */
-public class MyBatisApplicationTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public MyBatisApplicationTest( String testName )
-    {
-        super( testName );
-    }
+import com.xxx.springboot.mybatis.entity.User;
+import com.xxx.springboot.mybatis.service.UserService;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( MyBatisApplicationTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class MyBatisApplicationTest{ 
+   
+	@Autowired
+	private UserService userService;
+	
+//	@Autowired
+//	private UserMapper userMapper;
+	
+	@Test
+	public void queryUserByID() {
+		User user = userService.queryUserById(123456L);
+		System.out.println(user);
+	}
 }
