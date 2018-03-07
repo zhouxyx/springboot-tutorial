@@ -25,5 +25,6 @@
 		<module>springboot-rbac</module>
     <module>springboot-mybatis</module>
     <module>springboot-dubbo</module>
+    <module>springboot-shiro</module>
   </modules>
 </project>
