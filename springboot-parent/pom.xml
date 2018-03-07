@@ -24,5 +24,6 @@
 		<module>springboot-log</module>
 		<module>springboot-rbac</module>
     <module>springboot-mybatis</module>
+    <module>springboot-dubbo</module>
   </modules>
 </project>
