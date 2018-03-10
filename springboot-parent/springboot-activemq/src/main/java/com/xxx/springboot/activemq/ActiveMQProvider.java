@@ -1,6 +1,5 @@
 package com.xxx.springboot.activemq;
 
-import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
@@ -9,17 +8,17 @@ import org.springframework.stereotype.Component;
 public class ActiveMQProvider {
 
     @Autowired
-    private JmsTemplate jmsTemplate;
+    private JmsTemplate queueJmsTemplate;
     
-    
+    @Autowired
+    private JmsTemplate topicJmsTemplate;
 
     public void send(String message) {
-        jmsTemplate.convertAndSend("message", message);
+    	queueJmsTemplate.convertAndSend("message", message);
     }
     
-    
-    /*public void sendTopic(String message) {
-    	jmsTemplate.convertAndSend(new ActiveMQTopic("sample.topic"), message);
-    }*/
+    public void sendTopic(String message) {
+    	topicJmsTemplate.convertAndSend("sample.topic", message);
+    }
     
 }

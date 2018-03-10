@@ -17,14 +17,14 @@ public class MQApplicationTest {
 
 	@Test
 	public void send() {
-		long s = System.currentTimeMillis();
+		/*long s = System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++) {
 			activeMQProvider.send("ActiveMQ");
 		}
 		long e = System.currentTimeMillis();
-		System.out.println(e - s);
-
-		// activeMQProvider.sendTopic("ActiveMQ Topic");
+		System.out.println(e - s);*/
+		activeMQProvider.send("ActiveMQ");
+		activeMQProvider.sendTopic("ActiveMQ Topic");
 	}
 
 	@Autowired

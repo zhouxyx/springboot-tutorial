@@ -7,17 +7,17 @@ import org.springframework.stereotype.Component;
 public class ActiveMQConsumer {
 	@JmsListener(destination = "message", containerFactory = "jmsListenerContainerQueue")
 	public void receive(String message) {
-		//System.out.println("收到的 message 是：" + message);
+		System.out.println("收到的 message 是：" + message);
 	}
 
-	/*@JmsListener(destination = "sample.topic", containerFactory = "jmsListenerContainerTopic")
+	@JmsListener(destination = "sample.topic", containerFactory = "jmsListenerContainerTopic")
 	public void receiveTopic(String message) {
 		System.out.println("topic1：" + message);
-	}*/
+	}
 
-	/*@JmsListener(destination = "sample.topic", containerFactory = "jmsListenerContainerTopic")
+	@JmsListener(destination = "sample.topic", containerFactory = "jmsListenerContainerTopic")
 	public void receiveTopic2(String message) {
 		System.out.println("topic2：" + message);
-	}*/
+	}
 
 }
