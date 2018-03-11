@@ -3,9 +3,9 @@ package com.xxx.springboot.dubbo.pojo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class User implements Serializable{
+public class User /*implements Serializable*/{
 	
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 	private Long userId;
 	private String userName;
 	private String password;
