@@ -25,5 +25,12 @@
 	<modules>
 		<module>springboot-app-a</module>
 		<module>springboot-app-b</module>
+		<module>sso-cas</module>
 	</modules>
+	<!-- 
+	
+		ref:
+		https://github.com/coder-huang/sso-shiro-cas
+		http://blog.csdn.net/xiewendong93/article/details/78801361
+	 -->
 </project>

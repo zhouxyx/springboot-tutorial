@@ -22,9 +22,9 @@ public class UserController {
 	@RequestMapping("/loginSuccess")
 	public String loginSuccess(){
 		
-		logger.info("登录成功");
+		logger.info("B登录成功");
 		
-		return "../index";
+		return "index";
 	}
 
 }

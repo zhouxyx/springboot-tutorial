@@ -24,7 +24,6 @@ import com.xxx.springboot.app.service.UserService;
  * @author coderhuang
  * 
  */
-@SuppressWarnings("deprecation")
 public class UserRealm extends CasRealm {
 	
 	@Autowired
@@ -38,16 +37,20 @@ public class UserRealm extends CasRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-		User userInfo = (User) principals.getPrimaryPrincipal();
+		String username =(String) principals.getPrimaryPrincipal();
+//		User userInfo = (User) principals.getPrimaryPrincipal();
+		
+		User user = userService.findByUsername(username);
+		
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		for (Role role : userService.findRolesByUserId(userInfo.getUserId())) {
+		for (Role role : userService.findRolesByUserId(user.getUserId())) {
 			authorizationInfo.addRole(role.getRoleName());
 			for (Resource Resource : userService.findResourcesByRoleId(role.getRoleId())) {
 				authorizationInfo.addStringPermission(Resource.getPermissionKey());
 			}
 		}
 		
-		roles.put(userInfo.getUserName(), authorizationInfo);
+		roles.put(user.getUserName(), authorizationInfo);
 		
 		return authorizationInfo;
 	}
