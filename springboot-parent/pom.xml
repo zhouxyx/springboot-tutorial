@@ -29,5 +29,6 @@
 		<module>springboot-activemq</module>
 		<module>springboot-redis</module>
     <module>springboot-zk</module>
+    <module>springboot-sso</module>
   </modules>
 </project>

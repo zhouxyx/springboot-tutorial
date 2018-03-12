@@ -22,6 +22,6 @@ public class ZkAppTest {
 	
 	@Test
 	public void setData() {
-		zkService.setData("/myzk/service/address", "hello world");
+		zkService.setData("/myzk/service/address", "AAA");
 	}
 }
