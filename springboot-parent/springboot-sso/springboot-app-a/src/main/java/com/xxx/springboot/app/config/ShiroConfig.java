@@ -4,11 +4,13 @@ import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.cas.CasFilter;
 import org.apache.shiro.cas.CasSubjectFactory;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,10 +51,25 @@ public class ShiroConfig {
 	}
 
 	@Bean
-	public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-		DefaultAdvisorAutoProxyCreator daap = new DefaultAdvisorAutoProxyCreator();
-		daap.setProxyTargetClass(true);
-		return daap;
+	@ConditionalOnMissingBean
+	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+		DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
+		defaultAAP.setProxyTargetClass(true);
+		return defaultAAP;
+	}
+
+	/**
+	 * 开启注解支持
+	 * @param casServerUrlPrefix
+	 * @param shiroServerUrlPrefix
+	 * @return
+	 */
+	@Bean
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Value("${shiro.cas}") String casServerUrlPrefix,
+			@Value("${shiro.server}") String shiroServerUrlPrefix) {
+		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+		authorizationAttributeSourceAdvisor.setSecurityManager(getDefaultWebSecurityManager(casServerUrlPrefix, shiroServerUrlPrefix));
+		return authorizationAttributeSourceAdvisor;
 	}
 
 	@Bean(name = "securityManager")
@@ -83,10 +100,10 @@ public class ShiroConfig {
 		return casFilter;
 	}
 
-
 	@Bean(name = "shiroFilter")
 	public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager,
-			CasFilter casFilter,@Value("${shiro.cas}") String casServerUrlPrefix,@Value("${shiro.server}") String shiroServerUrlPrefix) {
+			CasFilter casFilter, @Value("${shiro.cas}") String casServerUrlPrefix,
+			@Value("${shiro.server}") String shiroServerUrlPrefix) {
 
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -96,7 +113,7 @@ public class ShiroConfig {
 		Map<String, Filter> filters = new HashMap<>();
 		filters.put("casFilter", casFilter);
 		LogoutFilter logoutFilter = new LogoutFilter();
-		String logoutUrl = casServerUrlPrefix + "/logout?service=" + shiroServerUrlPrefix+casFilterUrlPattern;
+		String logoutUrl = casServerUrlPrefix + "/logout?service=" + shiroServerUrlPrefix + casFilterUrlPattern;
 		logoutFilter.setRedirectUrl(logoutUrl);
 		filters.put("logout", logoutFilter);
 		shiroFilterFactoryBean.setFilters(filters);
@@ -107,6 +124,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/static", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
 
+		// filterChainDefinitionMap.put("/test/**", "authc");
 		filterChainDefinitionMap.put("/users/**", "authc");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;

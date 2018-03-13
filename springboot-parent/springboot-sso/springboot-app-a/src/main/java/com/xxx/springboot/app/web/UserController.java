@@ -20,8 +20,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping("/loginSuccess")
-	public String loginSuccess(){
-		
+	public String loginSuccess(){		
 		logger.info("A登录成功");
 		return "index";
 	}
