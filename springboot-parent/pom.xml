@@ -30,5 +30,6 @@
 		<module>springboot-redis</module>
     <module>springboot-zk</module>
     <module>springboot-sso</module>
+    <module>springboot-schedule</module>
   </modules>
 </project>
