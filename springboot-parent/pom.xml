@@ -31,5 +31,6 @@
     <module>springboot-zk</module>
     <module>springboot-sso</module>
     <module>springboot-schedule</module>
+    <module>springboot-mongo</module>
   </modules>
 </project>
