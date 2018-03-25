@@ -68,5 +68,10 @@
 			<artifactId>shiro-cas</artifactId>
 			<version>1.2.4</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency> 
 	</dependencies>
 </project>

@@ -21,9 +21,9 @@
 	</shiro:hasPermission>
 	
 	
-	<a href="http://127.0.0.1:8081/app1/shiro-cas">节点1</a>
-	
-	<a href="http://127.0.0.1:8082/app2/shiro-cas">节点2</a>
+	<a href="http://127.0.0.1:8081/app1/shiro-cas">节点1</a>|
+	<a href="http://127.0.0.1:8083/app1/shiro-cas">节点1-2</a>|
+	<a href="http://127.0.0.1:8082/app2/shiro-cas">节点2</a>|
 	
 	<a href="http://127.0.0.1:8081/app1/logout">单点登出</a>
 </body>
