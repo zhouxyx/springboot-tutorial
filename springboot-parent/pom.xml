@@ -32,5 +32,7 @@
     <module>springboot-sso</module>
     <module>springboot-schedule</module>
     <module>springboot-mongo</module>
-  </modules>
+    <module>helloworld-spring-boot-starter</module>
+    <module>springboot-starter</module>
+	</modules>
 </project>
